@@ -12,8 +12,10 @@ urls = []
 for line in f:
 	urls.append(line)
 
+# open file for output of data
 sys.stdout = open('resort_data_test.csv', 'w')
 
+# first line of the file for labeling purposes
 print 'name,vertical,summit,base,lifts,trails,longest_run,snowboarding,terrain_park,half_pipe,annual_snowfall,snowmaking,skiable_area,green,blue,black,double_black,xc,tubing'
 
 
@@ -28,24 +30,33 @@ for i in range(len(urls)):
 	# create soup object
 	soup = BeautifulSoup(data)
 
-
+	# get the table that has the relevant data
 	table = soup.find_all('table')[6].contents[1]
 
+	# create an empty dictionary for the data
 	data = {}
 
+	# add the resort name
 	data['name'] = (urls[i][urls[i].rfind('/')+1:-6])
 
+	# find the td tags in the table
 	results = table.find_all('td')
 	for i in range(len(results)):
+		# if the tag contains on of the labels then set it up in the dictionary
 		if str(results[i].contents[0])[-1] == ':':
 			temp = results[i+1].contents[0]
+			# if one of the percentages get tag within tag
 			if temp.find('.gif') != -1:
 				temp = results[i+1].contents[0].contents[0]
+			# remove commas
 			temp = temp.replace(',', '')
+			# if yes change to 1
 			if temp.find('Yes') != -1:
 				temp = 1
+			# if no change to 0
 			elif temp.find('No') != -1:
 				temp = 0
+			# edit for removing labels
 			elif temp.find('%') != -1:
 				temp = int(temp[:temp.find('%')])
 			elif temp.find('feet') != -1:
@@ -57,8 +68,11 @@ for i in range(len(urls)):
 			elif temp.find('acre') != -1:
 				temp = int(temp[:temp.find('acre')-1])
 
+			# add to dictionary
 			data[results[i].contents[0][:-1]] = temp
 
+
+	# output all values that exist for this resort
 
 	sys.stdout.write(data['name'])
 	sys.stdout.write(',')
@@ -119,4 +133,5 @@ for i in range(len(urls)):
 
 	sys.stdout.write('\n')
 
+	# sleep to avoid DDOS
 	time.sleep(1)
