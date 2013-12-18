@@ -1,6 +1,8 @@
 from bs4 import BeautifulSoup
 import requests
 import sys
+import time
+
 
 # open file with resorts urls
 f = open('resort_urls.txt', 'r')
@@ -10,7 +12,7 @@ urls = []
 for line in f:
 	urls.append(line)
 
-sys.stdout = open('resort_data.csv', 'w')
+sys.stdout = open('resort_data_test.csv', 'w')
 
 print 'name,vertical,summit,base,lifts,trails,longest_run,snowboarding,terrain_park,half_pipe,annual_snowfall,snowmaking,skiable_area,green,blue,black,double_black,xc,tubing'
 
@@ -106,7 +108,7 @@ for i in range(len(urls)):
 	if 'most difficult' in data: sys.stdout.write(str(data['most difficult']))
 	sys.stdout.write(',')
 
-	if 'expert only' in data: sys.stdout.write(str(data['expert only']))
+	if 'experts only' in data: sys.stdout.write(str(data['experts only']))
 	sys.stdout.write(',')
 
 	if 'x-country' in data: sys.stdout.write(str(data['x-country']))
@@ -116,3 +118,5 @@ for i in range(len(urls)):
 	sys.stdout.write(',')
 
 	sys.stdout.write('\n')
+
+	time.sleep(1)
