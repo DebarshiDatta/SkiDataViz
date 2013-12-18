@@ -13,7 +13,7 @@ for line in f:
 	urls.append(line)
 
 # open file for output of data
-sys.stdout = open('resort_data_test.csv', 'w')
+sys.stdout = open('resort_data.csv', 'w')
 
 # first line of the file for labeling purposes
 print 'name,vertical,summit,base,lifts,trails,longest_run,snowboarding,terrain_park,half_pipe,annual_snowfall,snowmaking,skiable_area,green,blue,black,double_black,xc,tubing'
