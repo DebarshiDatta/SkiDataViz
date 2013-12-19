@@ -1,4 +1,4 @@
-resort.data <- read.csv('../resort_data.csv', header=TRUE)
+resort.data <- read.csv('../Data/resort_data.csv', header=TRUE)
 
 ggplot(resort.data, aes(x=skiable_area, y=trails)) +
   geom_point(shape=16,alpha=1/4, color="#FF7400", size = 3) + 
