@@ -4,11 +4,23 @@ SkiDataViz
 code for visualizing data collected about ski resorts
 
 
+Data Collection
+---------------
+
+Used python code in resort_data_code to scrape resort data from skiresortsnow.com where each resort had its own page and needed to be accessed, downloaded, and scraped for the info.
+
+
+Data Visualization
+------------------
+
+Used R code in RAnalysis to create charts to help visualize the data.
+
+* Skiable Acres vs. Trails
 
 
 
 Data Sources
-============
+------------
 
 
 Ski area location data
