@@ -217,7 +217,8 @@ pip-log.txt
 
 
 ##############
-## R Studio ##
+## R Studio
+##############
 
 .RData
 .Rhistory
