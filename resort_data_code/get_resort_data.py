@@ -13,10 +13,10 @@ for line in f:
 	urls.append(line)
 
 # open file for output of data
-sys.stdout = open('resort_data.csv', 'w')
+sys.stdout = open('../Data/resort_data.csv', 'w')
 
 # first line of the file for labeling purposes
-print 'name,vertical,summit,base,lifts,trails,longest_run,snowboarding,terrain_park,half_pipe,annual_snowfall,snowmaking,skiable_area,green,blue,black,double_black,xc,tubing'
+print 'name,state,vertical,summit,base,lifts,trails,longest_run,snowboarding,terrain_park,half_pipe,annual_snowfall,snowmaking,skiable_area,green,blue,black,double_black,xc,tubing'
 
 
 # for each state
@@ -37,7 +37,11 @@ for i in range(len(urls)):
 	data = {}
 
 	# add the resort name
-	data['name'] = (urls[i][urls[i].rfind('/')+1:-6])
+	n = urls[i].rfind('/')
+	data['name'] = urls[i][n+1:-6]
+	# add the state
+	m = urls[i].rfind('/',0,n)
+	data['state'] = urls[i][m+1:n]
 
 	# find the td tags in the table
 	results = table.find_all('td')
@@ -75,6 +79,9 @@ for i in range(len(urls)):
 	# output all values that exist for this resort
 
 	sys.stdout.write(data['name'])
+	sys.stdout.write(',')
+
+	sys.stdout.write(data['state'])
 	sys.stdout.write(',')
 
 	if 'vertical drop' in data: sys.stdout.write(str(data['vertical drop']))
