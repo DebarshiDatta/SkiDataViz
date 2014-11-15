@@ -38,7 +38,7 @@ for i in range(len(urls)):
 
 	# add the resort name
 	n = urls[i].rfind('/')
-	data['name'] = urls[i][n+1:-6]
+	data['name'] = urls[i][n+1:-7]
 	# add the state
 	m = urls[i].rfind('/',0,n)
 	data['state'] = urls[i][m+1:n]
